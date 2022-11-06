@@ -7,7 +7,7 @@ class RemoteCurrentWeather {
   ) {}
 
   async current(): Promise<any> {
-    return await this.httpGetClient.get(this.url)
+    return await this.httpGetClient.get({ url: this.url })
   }
 }
 

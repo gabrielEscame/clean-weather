@@ -1,9 +1,9 @@
-import { HttpGetClient } from '../protocols/http/http-get-client'
+import { HttpGetClient, HttpGetParams } from '../protocols/http/http-get-client'
 
 export class HttpGetClientSpy implements HttpGetClient {
   url?: string
-  async get(url: string): Promise<any> {
-    this.url = url
+  async get(params: HttpGetParams): Promise<any> {
+    this.url = params.url
     return await Promise.resolve()
   }
 }
