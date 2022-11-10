@@ -1,4 +1,4 @@
-import { CurrentWeatherParams } from '../usecases/weather'
+import { CurrentWeatherParams } from '@/domain/usecases/weather'
 import { faker } from '@faker-js/faker'
 
 export const mockCurrentWeather = (): CurrentWeatherParams => ({

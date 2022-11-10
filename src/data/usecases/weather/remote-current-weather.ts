@@ -1,5 +1,5 @@
-import { HttpGetClient } from '../../../data/protocols/http/http-get-client'
-import { CurrentWeatherParams } from '../../../domain/usecases/weather'
+import { HttpGetClient } from '@/data/protocols/http/http-get-client'
+import { CurrentWeatherParams } from '@/domain/usecases/weather'
 
 class RemoteCurrentWeather {
   constructor(

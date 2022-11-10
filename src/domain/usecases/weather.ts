@@ -1,4 +1,4 @@
-import { CurrentWeatherModel } from '../models/currentWeatherModel'
+import { CurrentWeatherModel } from '@/domain/models/currentWeatherModel'
 
 export type CurrentWeatherParams = {
   long: string

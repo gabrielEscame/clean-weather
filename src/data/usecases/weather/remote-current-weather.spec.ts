@@ -1,6 +1,6 @@
 import RemoteCurrentWeather from './remote-current-weather'
-import { HttpGetClientSpy } from '../../test/mock-http-client'
-import { mockCurrentWeather } from '../../../domain/test/mock-current-weather'
+import { HttpGetClientSpy } from '@/data/test/mock-http-client'
+import { mockCurrentWeather } from '@/domain/test/mock-current-weather'
 
 type SutTypes = {
   sut: RemoteCurrentWeather
