@@ -1,6 +1,6 @@
 import { CurrentWeatherModel } from '../models/currentWeatherModel'
 
-type CurrentWeatherParams = {
+export type CurrentWeatherParams = {
   long: string
   lat: string
 }

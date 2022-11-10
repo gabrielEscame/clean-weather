@@ -1,4 +1,5 @@
-import { HttpGetClient } from 'src/data/protocols/http/http-get-client'
+import { HttpGetClient } from '../../../data/protocols/http/http-get-client'
+import { CurrentWeatherParams } from '../../../domain/usecases/weather'
 
 class RemoteCurrentWeather {
   constructor(
@@ -6,8 +7,10 @@ class RemoteCurrentWeather {
     private readonly httpGetClient: HttpGetClient
   ) {}
 
-  async current(): Promise<any> {
-    return await this.httpGetClient.get({ url: this.url })
+  async current(params: CurrentWeatherParams): Promise<any> {
+    const url = this.url.replace(':lat', params.lat).replace(':long', params.long)
+
+    return await this.httpGetClient.get({ url })
   }
 }
 
