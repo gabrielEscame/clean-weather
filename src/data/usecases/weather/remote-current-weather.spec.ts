@@ -1,5 +1,6 @@
 import RemoteCurrentWeather from './remote-current-weather'
 import { HttpGetClientSpy } from '../../test/mock-http-client'
+import { mockCurrentWeather } from '../../../domain/test/mock-current-weather'
 
 type SutTypes = {
   sut: RemoteCurrentWeather
@@ -17,9 +18,15 @@ const makeSut = (url: string = 'any_url'): SutTypes => {
 
 describe('RemoteCurrentWeather', () => {
   test('Should call httpClint with correct URL', async () => {
-    const url = 'any_other_url'
-    const { sut, httpPostClientSpy } = makeSut(url)
-    await sut.current()
+    const baseUrl = 'any_other_url?lat=:lat&long=:long'
+    const { sut, httpPostClientSpy } = makeSut(baseUrl)
+
+    const currentWeatherParams = mockCurrentWeather()
+    await sut.current(currentWeatherParams)
+
+    const url = baseUrl
+      .replace(':lat', currentWeatherParams.lat)
+      .replace(':long', currentWeatherParams.long)
     expect(httpPostClientSpy.url).toEqual(url)
   })
 })
