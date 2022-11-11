@@ -1,6 +1,7 @@
 import { HttpGetClient } from '@/data/protocols/http/http-get-client'
 import { HttpStatusCode } from '@/data/protocols/http/http-response'
 import { InvalidCredentialsError } from '@/domain/errors/invalid-credentials'
+import { UnexpectedError } from '@/domain/errors/unexpected'
 import { CurrentWeatherParams } from '@/domain/usecases/weather'
 
 class RemoteCurrentWeather {
@@ -17,8 +18,12 @@ class RemoteCurrentWeather {
     const httpResponse = await this.httpGetClient.get({ url })
 
     switch (httpResponse.statusCode) {
+      case HttpStatusCode.ok:
+        break
       case HttpStatusCode.unauthorized:
         throw new InvalidCredentialsError()
+      default:
+        throw new UnexpectedError()
     }
   }
 }
