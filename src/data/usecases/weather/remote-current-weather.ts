@@ -1,4 +1,6 @@
 import { HttpGetClient } from '@/data/protocols/http/http-get-client'
+import { HttpStatusCode } from '@/data/protocols/http/http-response'
+import { InvalidCredentialsError } from '@/domain/errors/invalid-credentials'
 import { CurrentWeatherParams } from '@/domain/usecases/weather'
 
 class RemoteCurrentWeather {
@@ -7,10 +9,17 @@ class RemoteCurrentWeather {
     private readonly httpGetClient: HttpGetClient
   ) {}
 
-  async current(params: CurrentWeatherParams): Promise<any> {
-    const url = this.url.replace(':lat', params.lat).replace(':long', params.long)
+  async current(params: CurrentWeatherParams): Promise<void> {
+    const url = this.url
+      .replace(':lat', params.lat)
+      .replace(':long', params.long)
 
-    return await this.httpGetClient.get({ url })
+    const httpResponse = await this.httpGetClient.get({ url })
+
+    switch (httpResponse.statusCode) {
+      case HttpStatusCode.unauthorized:
+        throw new InvalidCredentialsError()
+    }
   }
 }
 
