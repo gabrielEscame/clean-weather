@@ -4,7 +4,7 @@ import { HttpResponse, HttpStatusCode } from '@/data/protocols/http/http-respons
 export class HttpGetClientSpy implements HttpGetClient {
   url?: string
   response: HttpResponse = {
-    statusCode: HttpStatusCode.noContent
+    statusCode: HttpStatusCode.ok
   }
 
   async get(params: HttpGetParams): Promise<HttpResponse> {
