@@ -4,14 +4,15 @@ import { HttpStatusCode } from '@/data/protocols/http/http-response'
 import { mockCurrentWeather } from '@/domain/test/mock-current-weather'
 import { InvalidCredentialsError } from '@/domain/errors/invalid-credentials'
 import { UnexpectedError } from '@/domain/errors/unexpected'
+import { CurrentWeatherModel } from '@/domain/models/currentWeatherModel'
 
 type SutTypes = {
   sut: RemoteCurrentWeather
-  httpGetClientSpy: HttpGetClientSpy
+  httpGetClientSpy: HttpGetClientSpy<CurrentWeatherModel>
 }
 
 const makeSut = (url: string = 'any_url?lat=:lat&long=:long'): SutTypes => {
-  const httpGetClientSpy = new HttpGetClientSpy()
+  const httpGetClientSpy = new HttpGetClientSpy<CurrentWeatherModel>()
   const sut = new RemoteCurrentWeather(url, httpGetClientSpy)
   return {
     sut,
