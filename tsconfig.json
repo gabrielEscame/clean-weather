@@ -2,12 +2,17 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@/*": ["*"] 
+      "@/*": [
+        "*"
+      ]
     },
     "outDir": "build/dist",
     "module": "esnext",
     "target": "es5",
-    "lib": ["es6", "dom"],
+    "lib": [
+      "es6",
+      "dom"
+    ],
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",
@@ -18,10 +23,9 @@
     "noImplicitThis": true,
     "noImplicitAny": true,
     "importHelpers": true,
-    "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
-    "esModuleInterop":true,
+    "esModuleInterop": true,
   },
   "exclude": [
     "node_modules",

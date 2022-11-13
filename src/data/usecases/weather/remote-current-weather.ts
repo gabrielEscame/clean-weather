@@ -3,15 +3,15 @@ import { HttpStatusCode } from '@/data/protocols/http/http-response'
 import { InvalidCredentialsError } from '@/domain/errors/invalid-credentials'
 import { UnexpectedError } from '@/domain/errors/unexpected'
 import { CurrentWeatherModel } from '@/domain/models/currentWeatherModel'
-import { CurrentWeatherParams } from '@/domain/usecases/weather'
+import { CurrentWeatherParams, Weather } from '@/domain/usecases/weather'
 
-class RemoteCurrentWeather {
+class RemoteCurrentWeather implements Weather {
   constructor(
     private readonly url: string,
     private readonly httpGetClient: HttpGetClient<CurrentWeatherModel>
   ) {}
 
-  async current(params: CurrentWeatherParams): Promise<void> {
+  async current(params: CurrentWeatherParams): Promise<CurrentWeatherModel> {
     const url = this.url
       .replace(':lat', params.lat)
       .replace(':long', params.long)
@@ -20,7 +20,7 @@ class RemoteCurrentWeather {
 
     switch (httpResponse.statusCode) {
       case HttpStatusCode.ok:
-        break
+        return httpResponse.body
       case HttpStatusCode.unauthorized:
         throw new InvalidCredentialsError()
       default:
