@@ -1,7 +1,10 @@
 import RemoteCurrentWeather from './remote-current-weather'
 import { HttpGetClientSpy } from '@/data/test/mock-http-client'
 import { HttpStatusCode } from '@/data/protocols/http/http-response'
-import { mockCurrentWeather } from '@/domain/test/mock-current-weather'
+import {
+  mockCurrentWeatherParams,
+  mockCurrentWeatherReponseBody
+} from '@/domain/test/mock-current-weather'
 import { InvalidCredentialsError } from '@/domain/errors/invalid-credentials'
 import { UnexpectedError } from '@/domain/errors/unexpected'
 import { CurrentWeatherModel } from '@/domain/models/currentWeatherModel'
@@ -25,7 +28,7 @@ describe('RemoteCurrentWeather', () => {
     const baseUrl = 'any_other_url?lat=:lat&long=:long'
     const { sut, httpGetClientSpy } = makeSut(baseUrl)
 
-    const currentWeatherParams = mockCurrentWeather()
+    const currentWeatherParams = mockCurrentWeatherParams()
     await sut.current(currentWeatherParams)
 
     const url = baseUrl
@@ -41,7 +44,7 @@ describe('RemoteCurrentWeather', () => {
       statusCode: HttpStatusCode.unauthorized
     }
 
-    const promise = sut.current(mockCurrentWeather())
+    const promise = sut.current(mockCurrentWeatherParams())
 
     await expect(promise).rejects.toThrow(new InvalidCredentialsError())
   })
@@ -53,7 +56,7 @@ describe('RemoteCurrentWeather', () => {
       statusCode: HttpStatusCode.unexpected
     }
 
-    const promise = sut.current(mockCurrentWeather())
+    const promise = sut.current(mockCurrentWeatherParams())
 
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
@@ -66,7 +69,7 @@ describe('RemoteCurrentWeather', () => {
       statusCode: HttpStatusCode.internal
     }
 
-    const promise = sut.current(mockCurrentWeather())
+    const promise = sut.current(mockCurrentWeatherParams())
 
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
@@ -79,8 +82,24 @@ describe('RemoteCurrentWeather', () => {
       statusCode: HttpStatusCode.notFound
     }
 
-    const promise = sut.current(mockCurrentWeather())
+    const promise = sut.current(mockCurrentWeatherParams())
 
     await expect(promise).rejects.toThrow(new UnexpectedError())
+  })
+
+  test('Should return currentWeatherModel case httpGetClientSpy returns 200', async () => {
+    const baseUrl = 'any_other_url?lat=:lat&long=:long'
+    const { sut, httpGetClientSpy } = makeSut(baseUrl)
+
+    const httpResponseBody = mockCurrentWeatherReponseBody()
+
+    httpGetClientSpy.response = {
+      statusCode: HttpStatusCode.ok,
+      body: httpResponseBody
+    }
+
+    const promise = await sut.current(mockCurrentWeatherParams())
+
+    expect(promise).toEqual(httpResponseBody)
   })
 })
