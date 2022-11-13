@@ -4,6 +4,22 @@
   "main": "index.js",
   "author": "Gabriel Escame <gabriel.escame@gmail.com>",
   "license": "MIT",
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "collectCoverageFrom": [
+      "<rootDir>/src/**/*.{ts,tsx}"
+    ],
+    "coverageDirectory": "coverage",
+    "testEnvironment": "node",
+    "transform": {
+      ".+\\.ts$": "ts-jest"
+    },
+    "moduleNameMapper": {
+      "@/(.*)": "<rootDir>/src/$1"
+    }
+  },
   "scripts": {
     "test": "jest"
   },
