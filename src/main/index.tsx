@@ -1,5 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { CurrentWeather } from '@/presentation/pages'
+import Router from '@/presentation/Routes'
 
-ReactDOM.render(<CurrentWeather />, document.getElementById('main'))
+ReactDOM.render(<Router />, document.getElementById('main'))
