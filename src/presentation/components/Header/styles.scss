@@ -1,0 +1,16 @@
+@import '../../styles/colors.scss';
+
+.header {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  padding: 36px 30px;
+  background-color: $blue-30;
+  border-radius: 0px 0px 8px 8px;
+
+  &__title {
+    font-size: 26px;
+    color: $white;
+    margin-bottom: 12px;
+  }
+}
