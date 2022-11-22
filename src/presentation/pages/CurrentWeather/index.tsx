@@ -2,7 +2,7 @@ import React from 'react'
 import './styles.scss'
 
 import WeatherCard from './components/WeatherCard'
-import Header from '../../components/Header'
+import { Header } from '@/presentation/components'
 
 const CurrentWeather: React.FC = () => {
   return (

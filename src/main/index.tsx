@@ -1,8 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import CurrentWeather from '@/presentation/pages/CurrentWeather'
+import { CurrentWeather } from '@/presentation/pages'
 
-ReactDOM.render(
-  <CurrentWeather/>,
-  document.getElementById('main')
-)
+ReactDOM.render(<CurrentWeather />, document.getElementById('main'))
