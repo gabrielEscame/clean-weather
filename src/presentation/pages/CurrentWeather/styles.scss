@@ -1,12 +1,17 @@
 @import '../../styles/colors.scss';
 
 .current-weather {
+  display: flex;
+  flex-direction: column;
   background-color: $white;
   height: 100vh;
 
   &__content {
     display: flex;
     flex-direction: column;
+    flex: auto;
+    position: relative;
+    height: max-content;
     padding: 22px 30px;
   }
 }
