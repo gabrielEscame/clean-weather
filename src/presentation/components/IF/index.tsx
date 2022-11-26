@@ -6,9 +6,7 @@ type Props = {
 }
 
 const IF: React.FC<Props> = ({ condition, children }) => {
-  if (condition) {
-    return children
-  }
+  return <>{condition && children}</>
 }
 
 export default IF
